@@ -1,13 +1,26 @@
 <template>
-  <n-h3 style="text-align: center">
-    订单
-  </n-h3>
-  <n-tabs type="segment" @update:value="handleUpdateValue">
-    <n-tab-pane name="待确认" tab="待确认"></n-tab-pane>
-    <n-tab-pane name="进行中" tab="进行中"></n-tab-pane>
-    <n-tab-pane name="已结束" tab="已结束"></n-tab-pane>
-  </n-tabs>
-  <n-data-table :columns="columns" :data="vdata" striped :pagination="pagination" @update:page="handlePageChange" />
+  <div>
+    <n-page-header subtitle="嘉晚饭军火展示" title="订单">
+      <template #header>
+        看看你的订单👀
+      </template>
+      <template #avatar>
+        <n-avatar src="/logo.png" />
+      </template>
+      <template #extra>
+        <n-space>
+          <n-button @click="refresh">刷新</n-button>
+        </n-space>
+      </template>
+    </n-page-header>
+
+    <n-tabs type="segment" style="margin-top: 15px;" @update:value="handleUpdateValue">
+      <n-tab-pane name="待确认" tab="待确认"></n-tab-pane>
+      <n-tab-pane name="进行中" tab="进行中"></n-tab-pane>
+      <n-tab-pane name="已结束" tab="已结束"></n-tab-pane>
+    </n-tabs>
+    <n-data-table :columns="columns" :data="vdata" striped :pagination="pagination" @update:page="handlePageChange" />
+  </div>
 </template>
 
 <script>
@@ -191,6 +204,9 @@ export default defineComponent({
           return {}
         });
         vdata.value = [...a1, ...data.value, ...a2]
+      },
+      refresh() {
+        console.log("刷新");
       }
     }
   },

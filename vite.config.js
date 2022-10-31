@@ -24,6 +24,28 @@ export default defineConfig({
     }),
     Components({
       resolvers: [NaiveUiResolver()]
-    })
-  ]
+    }),
+  ],
+  server: {
+    proxy: {
+      '/apis': {
+        target: 'http://localhost:8090',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/apis/, "")
+      },
+      '/food/getFoodImage': {
+        target: 'http://localhost:8090',
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/food\/getFoodImage/, "")
+      },
+      '/food/uploadImage': {
+        target: 'http://localhost:8090',
+        changeOrigin: true,
+      },
+      '/user/getAvatar': {
+        target: 'http://localhost:8090',
+        changeOrigin: true,
+      }
+    }
+  }
 })

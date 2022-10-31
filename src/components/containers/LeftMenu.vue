@@ -22,7 +22,9 @@ import {
   AlignSpaceEvenlyHorizontal20Regular,
   AppGeneric20Regular,
   Mail28Regular,
-  CheckmarkLock16Regular
+  CheckmarkLock16Regular,
+  Send24Regular,
+  FoodPizza24Regular
 } from "@vicons/fluent";
 import { RouterLink, useRouter } from "vue-router";
 import { useStore } from 'vuex'
@@ -80,17 +82,27 @@ const managerOptions = [
   },
   {
     label: "用户反馈",
-    key: "orders",
+    key: "feetback",
     icon: renderIcon(Channel24Regular),
   },
   {
-    label: "商铺管理",
+    label: "菜品管理",
     key: "shopManage",
+    icon: renderIcon(FoodPizza24Regular)
+  },
+  {
+    label: "骑手管理",
+    key: "riderManage",
+    icon: renderIcon(Send24Regular)
+  },
+  {
+    label: "增加店铺",
+    key: "addShop",
     icon: renderIcon(BuildingShop24Regular)
   },
   {
     label: "统计信息",
-    key: "Statistics",
+    key: "statistics",
     icon: renderIcon(AlignSpaceEvenlyHorizontal20Regular)
   },
 ];

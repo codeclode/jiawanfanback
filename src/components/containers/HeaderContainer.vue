@@ -19,9 +19,9 @@
         </n-gradient-text>
       </n-gi>
       <n-gi :span="4" class="itemContainer">
-        <n-avatar round :size="50" src="/logo.png" />
+        <n-avatar round :size="50" :src="avatar" />
         <n-gradient-text type="info" size="28">
-          李傲松
+          {{ store.state.login.username }}
         </n-gradient-text>
       </n-gi>
       <n-gi :span="4" class="itemContainer">
@@ -55,11 +55,12 @@
 </template>
 
 <script setup>
-import { computed, defineComponent, ref } from "@vue/runtime-core";
+import { computed, defineComponent, ref, watch } from "@vue/runtime-core";
 import { IosLogOut, IosLogIn } from '@vicons/ionicons4'
 import { AlertUrgent16Regular, PersonInfo16Regular } from '@vicons/fluent';
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import formatDate from '../../utils/formatDate';
 const store = useStore()
 const router = useRouter()
 const time = ref("")
@@ -67,12 +68,15 @@ const logined = computed(() => store.state.login.logined)
 const role = computed(() => store.state.login.role === "cook" ? "员工" : "经理")
 setInterval(() => {
   let t = new Date();
-  time.value = `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()}
-  ${t.getHours()}:${t.getMinutes()}:${t.getSeconds()}`
+  time.value = formatDate(t)
 }, 1000);
 function selfInfo() {
   router.push({ name: 'selfInfo' })
 }
+
+const avatar = computed(() => {
+  return store.state.login.logined ? 'user/getAvatar?username=' + store.state.login.username : "/logo.png"
+})
 
 function logInOut() {
   if (logined.value) {
